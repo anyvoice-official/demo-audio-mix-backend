@@ -17,6 +17,7 @@ export class AudioMixService {
   ): Promise<MixAudioResponseDto> {
     const pathToAudioMix = path.join(__dirname, 'assets', this.AUDIO_MIX_FILENAME);
 
+    this.log.log(`Start audio mixing...`);
     const outputFilename = Date.now() + '.aac';
 
     const { stderr } = await execute(
@@ -26,6 +27,8 @@ export class AudioMixService {
       [a0][a1]amix=inputs=2:duration=first:dropout_transition=4[out]" \
       -map "[out]"  ./uploads/${outputFilename} -loglevel error`,
     );
+
+    this.log.log(`Finish audio mixing...`);
 
     if (stderr) {
       this.log.error(stderr);
