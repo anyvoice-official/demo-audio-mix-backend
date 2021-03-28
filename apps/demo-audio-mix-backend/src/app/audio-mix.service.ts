@@ -33,7 +33,7 @@ export class AudioMixService {
     }
 
     return {
-      audioLink: `${outputFilename}`
+      audioLink: `https://demo-audio-mix.anyvoice.app/uploads/${outputFilename}`
     }
   }
 }
