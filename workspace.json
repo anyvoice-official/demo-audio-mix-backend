@@ -1,0 +1,60 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "demo-audio-mix-backend",
+  "projects": {
+    "demo-audio-mix-backend": {
+      "root": "apps/demo-audio-mix-backend",
+      "sourceRoot": "apps/demo-audio-mix-backend/src",
+      "projectType": "application",
+      "prefix": "demo-audio-mix-backend",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/demo-audio-mix-backend",
+            "main": "apps/demo-audio-mix-backend/src/main.ts",
+            "tsConfig": "apps/demo-audio-mix-backend/tsconfig.app.json",
+            "assets": ["apps/demo-audio-mix-backend/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/demo-audio-mix-backend/src/environments/environment.ts",
+                  "with": "apps/demo-audio-mix-backend/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "demo-audio-mix-backend:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/demo-audio-mix-backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/demo-audio-mix-backend"],
+          "options": {
+            "jestConfig": "apps/demo-audio-mix-backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}
